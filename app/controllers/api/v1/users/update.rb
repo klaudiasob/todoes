@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Users
@@ -9,7 +11,7 @@ module Api
         patch do
           user = User.find(params[:id])
           user.update!({
-                           email: params[:email],
+                         email: params[:email]
                        })
           user
         end

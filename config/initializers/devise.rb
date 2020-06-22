@@ -8,13 +8,6 @@ Devise.setup do |config|
     jwt.expiration_time = 1.day.to_i
   end
 
-  # The secret key used by Devise. Devise uses this key to generate
-  # random tokens. Changing this key will render invalid all existing
-  # confirmation, reset password and unlock tokens in the database.
-  # Devise will use the `secret_key_base` as its `secret_key`
-  # by default. You can change it below and use your own secret key.
-  # config.secret_key = '19a9f5c6352ce6cda56aacdfa5a1829aa1d0ffdcc0467a96868bb7be528ed7cf7a91eea7c48ae86048829fcf0b5cfbfe0d7a4800aa650f35033adf18e5f767fb'
-
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'

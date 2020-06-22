@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples '401' do
   it 'responds with 401' do
     subject

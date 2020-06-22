@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Users
@@ -11,9 +13,9 @@ module Api
 
         post do
           User.create!({
-                           email: params[:email],
-                           password: params[:password],
-                           password_confirmation: params[:password_confirmation]
+                         email: params[:email],
+                         password: params[:password],
+                         password_confirmation: params[:password_confirmation]
                        })
         end
       end

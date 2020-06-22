@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Api::V1::Users::Show, :type => :request do
+RSpec.describe Api::V1::Users::Show, type: :request do
   describe 'GET /api/v1/users/:id' do
-
     subject do
       get "/api/v1/users/#{id}", headers: headers
     end
@@ -12,10 +13,10 @@ RSpec.describe Api::V1::Users::Show, :type => :request do
 
     let(:response_body) do
       {
-          "id" => user.id,
-          "email" => user.email,
-          "created_at" => user.created_at.strftime('%FT%H:%M:%S.%3NZ'),
-          "updated_at" => user.updated_at.strftime('%FT%H:%M:%S.%3NZ')
+        'id' => user.id,
+        'email' => user.email,
+        'created_at' => user.created_at.strftime('%FT%H:%M:%S.%3NZ'),
+        'updated_at' => user.updated_at.strftime('%FT%H:%M:%S.%3NZ')
       }
     end
 
@@ -39,5 +40,4 @@ RSpec.describe Api::V1::Users::Show, :type => :request do
       end
     end
   end
-
 end

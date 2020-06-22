@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Api::V1::Users::Update, type: :request do
+RSpec.describe Api::V1::Users::Delete, type: :request do
   describe 'DELETE /api/v1/users/:id' do
     subject do
       delete "/api/v1/users/#{id}", headers: headers

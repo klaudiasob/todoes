@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Api
   module JwtHelper
     extend ::Grape::API::Helpers
 
     def unauthenticated_error
-      error!({message: 'Unauthenticated'}, 401)
+      error!({ message: 'Unauthenticated' }, 401)
     end
 
     def authenticate!
@@ -28,7 +30,7 @@ module Api
     def bearer_token
       pattern = /^Bearer /
       header  = headers['Authorization']
-      header.gsub(pattern, '') if header && header.match(pattern)
+      header.gsub(pattern, '') if header&.match(pattern)
     end
   end
 end
