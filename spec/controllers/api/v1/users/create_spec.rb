@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Api::V1::Users::Create, :type => :request do
+RSpec.describe Api::V1::Users::Create, type: :request do
   describe 'POST /api/v1/users' do
-
     subject do
       post '/api/v1/users', params: params
     end
@@ -10,9 +11,9 @@ RSpec.describe Api::V1::Users::Create, :type => :request do
     context 'when params are valid' do
       let(:params) do
         {
-            email: 'test@example.com',
-            password: 'password',
-            password_confirmation: 'password'
+          email: 'test@example.com',
+          password: 'password',
+          password_confirmation: 'password'
         }
       end
 
@@ -24,9 +25,9 @@ RSpec.describe Api::V1::Users::Create, :type => :request do
     context 'when params are invalid' do
       let(:params) do
         {
-            email: 'test@example.com',
-            password: 'password',
-            password_confirmation: 'pasword'
+          email: 'test@example.com',
+          password: 'password',
+          password_confirmation: 'pasword'
         }
       end
 

@@ -4,7 +4,7 @@ RSpec.describe Api::V1::Users::Show, :type => :request do
   describe 'GET /api/v1/users/:id' do
 
     subject do
-      get "/api/v1/users/#{id}"
+      get "/api/v1/users/#{id}", headers: headers
     end
 
     let(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
@@ -19,14 +19,24 @@ RSpec.describe Api::V1::Users::Show, :type => :request do
       }
     end
 
-    it 'returns a user' do
-      subject
-      expect(JSON.parse(response.body)).to eq(response_body)
+    context 'unauthenticated' do
+      include_context 'unauthenticated'
+
+      it_behaves_like '401'
     end
 
-    it 'returns status code 200' do
-      subject
-      expect(response).to have_http_status(:success)
+    context 'authenticated' do
+      include_context 'authenticated'
+
+      it 'returns a user' do
+        subject
+        expect(JSON.parse(response.body)).to eq(response_body)
+      end
+
+      it 'returns status code 200' do
+        subject
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
