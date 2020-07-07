@@ -7,7 +7,7 @@ module Api
         desc 'Delete a user.'
 
         delete do
-          User.find(params[:id]).destroy!
+          User.find(params[:user_id]).destroy!
         end
       end
     end
