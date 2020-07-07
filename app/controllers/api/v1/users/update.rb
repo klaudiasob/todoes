@@ -9,7 +9,7 @@ module Api
           optional :email, type: String, desc: 'Your email.'
         end
         patch do
-          user = User.find(params[:id])
+          user = User.find(params[:user_id])
           user.update!({
                          email: params[:email]
                        })
