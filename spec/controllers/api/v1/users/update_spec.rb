@@ -16,6 +16,8 @@ RSpec.describe Api::V1::Users::Update, type: :request do
       }
     end
 
+    let(:response_body) { Entities::User.represent(user.reload).serializable_hash.with_indifferent_access }
+
     context 'unauthenticated' do
       include_context 'unauthenticated'
 
@@ -27,6 +29,11 @@ RSpec.describe Api::V1::Users::Update, type: :request do
 
       it 'updates a user' do
         expect { subject }.to change { user.reload.email }.from(user.email).to(params[:email])
+      end
+
+      it 'returns a user' do
+        subject
+        expect(JSON.parse(response.body)).to eq(response_body)
       end
 
       it 'returns status code 200' do

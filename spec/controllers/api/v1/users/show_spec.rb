@@ -11,14 +11,7 @@ RSpec.describe Api::V1::Users::Show, type: :request do
     let(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
     let(:id) { user.id }
 
-    let(:response_body) do
-      {
-        'id' => user.id,
-        'email' => user.email,
-        'created_at' => user.created_at.strftime('%FT%H:%M:%S.%3NZ'),
-        'updated_at' => user.updated_at.strftime('%FT%H:%M:%S.%3NZ')
-      }
-    end
+    let(:response_body) { Entities::User.represent(user).serializable_hash.with_indifferent_access }
 
     context 'unauthenticated' do
       include_context 'unauthenticated'

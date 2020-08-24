@@ -13,12 +13,13 @@ module Api
           end
 
           post do
-            Todo.create!({
-                           user_id: params[:user_id],
-                           title: params[:title],
-                           description: params[:description],
-                           finished: params[:finished]
-                         })
+            todo = Todo.create!({
+                                  user_id: params[:user_id],
+                                  title: params[:title],
+                                  description: params[:description],
+                                  finished: params[:finished]
+                                })
+            present todo, with: Entities::Todo
           end
         end
       end

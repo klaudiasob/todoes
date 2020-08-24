@@ -12,11 +12,12 @@ module Api
         end
 
         post do
-          User.create!({
-                         email: params[:email],
-                         password: params[:password],
-                         password_confirmation: params[:password_confirmation]
-                       })
+          user = User.create!({
+                                email: params[:email],
+                                password: params[:password],
+                                password_confirmation: params[:password_confirmation]
+                              })
+          present user, with: Entities::User
         end
       end
     end

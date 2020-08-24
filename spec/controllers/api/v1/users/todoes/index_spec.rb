@@ -10,6 +10,7 @@ RSpec.describe Api::V1::Users::Todoes::Index, type: :request do
 
     let(:user) { create(:user) }
     let(:id) { user.id }
+    let(:response_body) { Entities::Todo.represent(Todo.where(user_id: user.id)).map { |todo| todo.serializable_hash.with_indifferent_access } }
 
     context 'unauthenticated' do
       include_context 'unauthenticated'
@@ -24,7 +25,7 @@ RSpec.describe Api::V1::Users::Todoes::Index, type: :request do
         create_list(:todo, 3)
         create_list(:todo, 3, user: user)
         subject
-        expect(JSON.parse(response.body).size).to eq(3)
+        expect(JSON.parse(response.body)).to eq(response_body)
       end
     end
   end

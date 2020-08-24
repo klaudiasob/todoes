@@ -8,6 +8,7 @@ module Api
 
         delete do
           User.find(params[:user_id]).destroy!
+          head :no_content
         end
       end
     end

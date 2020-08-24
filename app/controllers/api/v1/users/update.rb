@@ -13,7 +13,7 @@ module Api
           user.update!({
                          email: params[:email]
                        })
-          user
+          present user, with: Entities::User
         end
       end
     end
