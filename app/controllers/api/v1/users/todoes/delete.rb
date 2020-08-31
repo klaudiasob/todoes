@@ -9,6 +9,7 @@ module Api
 
           delete do
             Todo.find(params[:todo_id]).destroy!
+            header :no_content
           end
         end
       end

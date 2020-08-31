@@ -8,7 +8,9 @@ module Api
           desc 'Returns all users todoes.'
 
           get do
-            Todo.where(user_id: params[:user_id])
+            todoes = Todo.where(user_id: params[:user_id])
+
+            present todoes, with: Entities::Todo
           end
         end
       end

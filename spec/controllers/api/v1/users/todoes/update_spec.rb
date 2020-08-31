@@ -17,6 +17,7 @@ RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
         finished: true
       }
     end
+    let(:response_body) { Entities::Todo.represent(todo.reload).serializable_hash.with_indifferent_access }
 
     context 'unauthenticated' do
       include_context 'unauthenticated'
@@ -34,6 +35,11 @@ RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
       it 'returns status code 200' do
         subject
         expect(response).to have_http_status(:success)
+      end
+
+      it 'returns a todo' do
+        subject
+        expect(JSON.parse(response.body)).to eq(response_body)
       end
     end
   end

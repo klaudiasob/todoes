@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'devise-jwt', '~> 0.6.0'
 gem 'grape'
+gem 'grape-entity'
 gem 'rack-cors'
 
 group :development, :test do

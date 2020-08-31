@@ -7,7 +7,9 @@ module Api
         desc 'Return a user.'
 
         get do
-          User.find(params[:user_id])
+          user = User.find(params[:user_id])
+
+          present user, with: Entities::User
         end
       end
     end

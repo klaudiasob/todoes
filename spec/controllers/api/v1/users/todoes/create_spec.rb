@@ -17,6 +17,7 @@ RSpec.describe Api::V1::Users::Todoes::Create, type: :request do
         finished: 'false'
       }
     end
+    let(:response_body) { Entities::Todo.represent(Todo.last).serializable_hash.with_indifferent_access }
 
     context 'unauthenticated' do
       include_context 'unauthenticated'
@@ -30,6 +31,11 @@ RSpec.describe Api::V1::Users::Todoes::Create, type: :request do
       context 'when params are valid' do
         it 'creates a todo' do
           expect { subject }.to change(Todo, :count).by(1)
+        end
+
+        it 'returns a todo' do
+          subject
+          expect(JSON.parse(response.body)).to eq(response_body)
         end
       end
 

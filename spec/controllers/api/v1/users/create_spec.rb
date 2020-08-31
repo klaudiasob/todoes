@@ -8,6 +8,8 @@ RSpec.describe Api::V1::Users::Create, type: :request do
       post '/api/v1/users', params: params
     end
 
+    let(:response_body) { Entities::User.represent(User.last).serializable_hash.with_indifferent_access }
+
     context 'when params are valid' do
       let(:params) do
         {
@@ -19,6 +21,11 @@ RSpec.describe Api::V1::Users::Create, type: :request do
 
       it 'creates a user' do
         expect { subject }.to change(User, :count).by(1)
+      end
+
+      it 'returns a user' do
+        subject
+        expect(JSON.parse(response.body)).to eq(response_body)
       end
     end
 

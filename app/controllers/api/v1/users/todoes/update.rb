@@ -16,7 +16,7 @@ module Api
             todo = Todo.find(params[:todo_id])
             todo.assign_attributes(params.except(:todo_id))
             todo.save!
-            todo
+            present todo, with: Entities::Todo
           end
         end
       end
