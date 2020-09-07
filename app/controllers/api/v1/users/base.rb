@@ -9,8 +9,8 @@ module Api
 
           before { authenticate! }
 
-          route_param :user_id do
-            mount Show
+          namespace :me do
+            mount Me
             mount Update
             mount Delete
 

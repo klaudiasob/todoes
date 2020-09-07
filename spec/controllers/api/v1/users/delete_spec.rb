@@ -3,13 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Delete, type: :request do
-  describe 'DELETE /api/v1/users/:id' do
+  describe 'DELETE /api/v1/users/me' do
     subject do
-      delete "/api/v1/users/#{id}", headers: headers
+      delete '/api/v1/users/me', headers: headers
     end
 
     let!(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
-    let(:id) { user.id }
 
     context 'unauthenticated' do
       include_context 'unauthenticated'

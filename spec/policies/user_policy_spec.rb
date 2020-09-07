@@ -26,7 +26,7 @@ RSpec.describe UserPolicy do
     end
   end
 
-  permissions :show? do
+  permissions :me? do
     context 'user is not current user' do
       it 'denies access to show user' do
         expect(subject).not_to permit(User.new, User.new)

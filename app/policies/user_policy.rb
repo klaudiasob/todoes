@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
     user == record
   end
 
-  def show?
+  def me?
     user == record
   end
 

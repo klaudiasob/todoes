@@ -3,13 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Update, type: :request do
-  describe 'PATCH /api/v1/users/:id' do
+  describe 'PATCH /api/v1/users/me' do
     subject do
-      patch "/api/v1/users/#{id}", params: params, headers: headers
+      patch '/api/v1/users/me', params: params, headers: headers
     end
 
     let(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
-    let(:id) { user.id }
     let(:params) do
       {
         email: 'test2@example.com'
