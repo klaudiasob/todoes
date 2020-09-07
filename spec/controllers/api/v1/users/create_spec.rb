@@ -11,9 +11,9 @@ RSpec.describe Api::V1::Users::Create, type: :request do
     let(:response_body) { Entities::User.represent(User.last).serializable_hash.with_indifferent_access }
     let(:params) do
       {
-          email: 'test@example.com',
-          password: 'password',
-          password_confirmation: 'password'
+        email: 'test@example.com',
+        password: 'password',
+        password_confirmation: 'password'
       }
     end
 

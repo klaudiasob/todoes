@@ -2,14 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::Users::Show, type: :request do
-  describe 'GET /api/v1/users/:id' do
+RSpec.describe Api::V1::Users::Me, type: :request do
+  describe 'GET /api/v1/users/me' do
     subject do
-      get "/api/v1/users/#{id}", headers: headers
+      get '/api/v1/users/me', headers: headers
     end
 
     let(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
-    let(:id) { user.id }
 
     let(:response_body) { Entities::User.represent(user).serializable_hash.with_indifferent_access }
 
@@ -23,7 +22,7 @@ RSpec.describe Api::V1::Users::Show, type: :request do
       include_context 'authenticated'
 
       context 'authorized' do
-        include_context 'authorized', UserPolicy, :show?
+        include_context 'authorized', UserPolicy, :me?
 
         it 'returns a user' do
           subject
@@ -37,7 +36,7 @@ RSpec.describe Api::V1::Users::Show, type: :request do
       end
 
       context 'unauthorized' do
-        include_context 'unauthorized', UserPolicy, :show?
+        include_context 'unauthorized', UserPolicy, :me?
 
         it_behaves_like '403'
       end
