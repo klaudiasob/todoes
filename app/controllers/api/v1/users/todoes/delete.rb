@@ -8,7 +8,9 @@ module Api
           desc 'Delete a todo.'
 
           delete do
-            Todo.find(params[:todo_id]).destroy!
+            todo = Todo.find(params[:todo_id])
+            authorize todo, :delete?
+            todo.destroy!
             header :no_content
           end
         end

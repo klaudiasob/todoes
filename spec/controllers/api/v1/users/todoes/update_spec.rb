@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
 
     let(:user) { create(:user) }
     let(:id) { user.id }
-    let(:todo) { create(:todo, :not_finished) }
+    let(:todo) { create(:todo, :not_finished, user: user) }
     let(:todo_id) { todo.id }
     let(:params) do
       {
@@ -27,19 +27,28 @@ RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
 
     context 'authenticated' do
       include_context 'authenticated'
+      context 'authorized' do
+        include_context 'authorized', TodoPolicy, :update?
 
-      it 'updates a todo' do
-        expect { subject }.to change { todo.reload.finished }.from(todo.finished).to(params[:finished])
+        it 'updates a todo' do
+          expect { subject }.to change { todo.reload.finished }.from(todo.finished).to(params[:finished])
+        end
+
+        it 'returns status code 200' do
+          subject
+          expect(response).to have_http_status(:success)
+        end
+
+        it 'returns a todo' do
+          subject
+          expect(JSON.parse(response.body)).to eq(response_body)
+        end
       end
 
-      it 'returns status code 200' do
-        subject
-        expect(response).to have_http_status(:success)
-      end
+      context 'unauthorized' do
+        include_context 'unauthorized', TodoPolicy, :update?
 
-      it 'returns a todo' do
-        subject
-        expect(JSON.parse(response.body)).to eq(response_body)
+        it_behaves_like '403'
       end
     end
   end

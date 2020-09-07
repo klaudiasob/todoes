@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Users::Todoes::Delete, type: :request do
 
     let!(:user) { create(:user) }
     let(:id) { user.id }
-    let!(:todo) { create(:todo) }
+    let!(:todo) { create(:todo, user: user) }
     let(:todo_id) { todo.id }
 
     context 'unauthenticated' do
@@ -22,13 +22,22 @@ RSpec.describe Api::V1::Users::Todoes::Delete, type: :request do
     context 'authenticated' do
       include_context 'authenticated'
 
-      it 'deletes a todo' do
-        expect { subject }.to change(Todo, :count).by(-1)
+      context 'authorized' do
+        include_context 'authorized', TodoPolicy, :delete?
+        it 'deletes a todo' do
+          expect { subject }.to change(Todo, :count).by(-1)
+        end
+
+        it 'returns status code 200' do
+          subject
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it 'returns status code 200' do
-        subject
-        expect(response).to have_http_status(:success)
+      context 'unauthorized' do
+        include_context 'unauthorized', TodoPolicy, :delete?
+
+        it_behaves_like '403'
       end
     end
   end

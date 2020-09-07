@@ -14,6 +14,8 @@ module Api
 
           patch do
             todo = Todo.find(params[:todo_id])
+            authorize todo, :update?
+
             todo.assign_attributes(params.except(:todo_id))
             todo.save!
             present todo, with: Entities::Todo

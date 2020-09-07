@@ -21,11 +21,21 @@ RSpec.describe Api::V1::Users::Todoes::Index, type: :request do
     context 'authenticated' do
       include_context 'authenticated'
 
-      it 'returns todoes' do
-        create_list(:todo, 3)
-        create_list(:todo, 3, user: user)
-        subject
-        expect(JSON.parse(response.body)).to eq(response_body)
+      context 'authorized' do
+        include_context 'authorized', TodoPolicy, :index?
+
+        it 'returns todoes' do
+          create_list(:todo, 3)
+          create_list(:todo, 3, user: user)
+          subject
+          expect(JSON.parse(response.body)).to eq(response_body)
+        end
+      end
+
+      context 'unauthorized' do
+        include_context 'unauthorized', TodoPolicy, :index?
+
+        it_behaves_like '403'
       end
     end
   end

@@ -22,14 +22,24 @@ RSpec.describe Api::V1::Users::Show, type: :request do
     context 'authenticated' do
       include_context 'authenticated'
 
-      it 'returns a user' do
-        subject
-        expect(JSON.parse(response.body)).to eq(response_body)
+      context 'authorized' do
+        include_context 'authorized', UserPolicy, :show?
+
+        it 'returns a user' do
+          subject
+          expect(JSON.parse(response.body)).to eq(response_body)
+        end
+
+        it 'returns status code 200' do
+          subject
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it 'returns status code 200' do
-        subject
-        expect(response).to have_http_status(:success)
+      context 'unauthorized' do
+        include_context 'unauthorized', UserPolicy, :show?
+
+        it_behaves_like '403'
       end
     end
   end

@@ -7,8 +7,10 @@ module Api
         desc 'Delete a user.'
 
         delete do
-          User.find(params[:user_id]).destroy!
-          head :no_content
+          user = current_user
+          authorize user, :delete?
+          user.destroy!
+          header :no_content
         end
       end
     end

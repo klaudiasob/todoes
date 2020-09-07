@@ -28,29 +28,39 @@ RSpec.describe Api::V1::Users::Todoes::Create, type: :request do
     context 'authenticated' do
       include_context 'authenticated'
 
-      context 'when params are valid' do
-        it 'creates a todo' do
-          expect { subject }.to change(Todo, :count).by(1)
+      context 'authorized' do
+        include_context 'authorized', TodoPolicy, :create?
+
+        context 'when params are valid' do
+          it 'creates a todo' do
+            expect { subject }.to change(Todo, :count).by(1)
+          end
+
+          it 'returns a todo' do
+            subject
+            expect(JSON.parse(response.body)).to eq(response_body)
+          end
         end
 
-        it 'returns a todo' do
-          subject
-          expect(JSON.parse(response.body)).to eq(response_body)
+        context 'when params are invalid' do
+          let(:params) do
+            {
+              title: nil,
+              description: 'Test description',
+              finished: 'false'
+            }
+          end
+
+          it 'raises an error' do
+            expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+          end
         end
       end
 
-      context 'when params are invalid' do
-        let(:params) do
-          {
-            title: nil,
-            description: 'Test description',
-            finished: 'false'
-          }
-        end
+      context 'unauthorized' do
+        include_context 'unauthorized', TodoPolicy, :create?
 
-        it 'raises an error' do
-          expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
-        end
+        it_behaves_like '403'
       end
     end
   end
