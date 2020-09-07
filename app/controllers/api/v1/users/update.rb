@@ -9,7 +9,8 @@ module Api
           optional :email, type: String, desc: 'Your email.'
         end
         patch do
-          user = User.find(params[:user_id])
+          user = current_user
+          authorize user, :update?
           user.update!({
                          email: params[:email]
                        })

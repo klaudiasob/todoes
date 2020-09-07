@@ -7,8 +7,8 @@ module Api
         desc 'Return a user.'
 
         get do
-          user = User.find(params[:user_id])
-
+          user = current_user
+          authorize user, :show?
           present user, with: Entities::User
         end
       end

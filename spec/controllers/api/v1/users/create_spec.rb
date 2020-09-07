@@ -9,23 +9,25 @@ RSpec.describe Api::V1::Users::Create, type: :request do
     end
 
     let(:response_body) { Entities::User.represent(User.last).serializable_hash.with_indifferent_access }
-
-    context 'when params are valid' do
-      let(:params) do
-        {
+    let(:params) do
+      {
           email: 'test@example.com',
           password: 'password',
           password_confirmation: 'password'
-        }
-      end
+      }
+    end
 
-      it 'creates a user' do
-        expect { subject }.to change(User, :count).by(1)
-      end
+    context 'when params are valid' do
+      context 'authorized' do
+        include_context 'authorized', UserPolicy, :create?
+        it 'creates a user' do
+          expect { subject }.to change(User, :count).by(1)
+        end
 
-      it 'returns a user' do
-        subject
-        expect(JSON.parse(response.body)).to eq(response_body)
+        it 'returns a user' do
+          subject
+          expect(JSON.parse(response.body)).to eq(response_body)
+        end
       end
     end
 
@@ -41,6 +43,12 @@ RSpec.describe Api::V1::Users::Create, type: :request do
       it 'raises an error' do
         expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
       end
+    end
+
+    context 'unauthorized' do
+      include_context 'unauthorized', UserPolicy, :create?
+
+      it_behaves_like '403'
     end
   end
 end

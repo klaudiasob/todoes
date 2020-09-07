@@ -13,8 +13,10 @@ module Api
           end
 
           post do
+            authorize Todo, :create?
+
             todo = Todo.create!({
-                                  user_id: params[:user_id],
+                                  user_id: current_user.id,
                                   title: params[:title],
                                   description: params[:description],
                                   finished: params[:finished]

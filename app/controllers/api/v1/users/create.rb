@@ -12,6 +12,7 @@ module Api
         end
 
         post do
+          authorize User, :create?
           user = User.create!({
                                 email: params[:email],
                                 password: params[:password],

@@ -20,13 +20,22 @@ RSpec.describe Api::V1::Users::Delete, type: :request do
     context 'authenticated' do
       include_context 'authenticated'
 
-      it 'deletes a user' do
-        expect { subject }.to change(User, :count).by(-1)
+      context 'authorized' do
+        include_context 'authorized', UserPolicy, :delete?
+        it 'deletes a user' do
+          expect { subject }.to change(User, :count).by(-1)
+        end
+
+        it 'returns status code 200' do
+          subject
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it 'returns status code 200' do
-        subject
-        expect(response).to have_http_status(:success)
+      context 'unauthorized' do
+        include_context 'unauthorized', UserPolicy, :delete?
+
+        it_behaves_like '403'
       end
     end
   end

@@ -31,6 +31,7 @@ gem 'devise'
 gem 'devise-jwt', '~> 0.6.0'
 gem 'grape'
 gem 'grape-entity'
+gem 'pundit'
 gem 'rack-cors'
 
 group :development, :test do
