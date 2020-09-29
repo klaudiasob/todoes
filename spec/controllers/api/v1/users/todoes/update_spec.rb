@@ -11,7 +11,7 @@ RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
     let(:user) { create(:user) }
     let(:id) { user.id }
     let(:todo) { create(:todo, :not_finished, user: user) }
-    let(:todo_id) { todo.id }
+    let(:todo_id) { todo.uuid }
     let(:params) do
       {
         finished: true

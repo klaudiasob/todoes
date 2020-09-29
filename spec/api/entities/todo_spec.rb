@@ -8,12 +8,13 @@ RSpec.describe Entities::Todo do
 
     let(:todo) { create(:todo) }
 
-    it 'exposes four attributes' do
-      expect(subject.size).to eq 4
+    it 'exposes five attributes' do
+      expect(subject.size).to eq 5
     end
 
     it 'exposes only allowed information' do
-      expect(subject).to include(title: todo.title, description: todo.description, finished: todo.finished, created_at: todo.created_at.iso8601)
+      expect(subject).to include(uuid: todo.uuid, title: todo.title, description: todo.description,
+                                 finished: todo.finished, created_at: todo.created_at.iso8601)
     end
   end
 end

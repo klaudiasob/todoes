@@ -7,6 +7,7 @@ FactoryBot.define do
     title { FFaker::CheesyLingo.sentence }
     description { FFaker::CheesyLingo.title }
     finished { FFaker::Boolean.random }
+    uuid { SecureRandom.uuid }
 
     trait :not_finished do
       finished { false }
