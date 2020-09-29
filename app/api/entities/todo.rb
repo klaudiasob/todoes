@@ -4,6 +4,7 @@ module Entities
   class Todo < Grape::Entity
     format_with(:iso_timestamp, &:iso8601)
 
+    expose :uuid
     expose :title
     expose :description
     expose :finished

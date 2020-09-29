@@ -21,7 +21,7 @@ module Api
                                   description: params[:description],
                                   finished: params[:finished]
                                 })
-            present todo, with: Entities::Todo
+            present todo.reload, with: Entities::Todo
           end
         end
       end

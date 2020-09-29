@@ -78,7 +78,7 @@ describe 'Todo' do
         }
       }
       let(:todo) { create(:todo, user: user) }
-      let(:todo_id) { todo.id }
+      let(:todo_id) { todo.uuid }
 
       response '200', 'todo updated' do
         let(:params) { { title: 'Test1' } }
@@ -106,7 +106,7 @@ describe 'Todo' do
       }
 
       let(:todo) { create(:todo, user: user) }
-      let(:todo_id) { todo.id }
+      let(:todo_id) { todo.uuid }
 
       response '204', 'todo deleted' do
         run_test!
