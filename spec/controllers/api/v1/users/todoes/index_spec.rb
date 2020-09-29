@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Todoes::Index, type: :request do
-  describe 'GET /api/v1/users/:id/todoes' do
+  describe 'GET /api/v1/users/me/todoes' do
     subject do
-      get "/api/v1/users/#{id}/todoes", headers: headers
+      get '/api/v1/users/me/todoes', headers: headers
     end
 
     let(:user) { create(:user) }

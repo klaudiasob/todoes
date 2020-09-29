@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Todoes::Delete, type: :request do
-  describe 'DELETE /api/v1/users/:id/todoes/:todo_id' do
+  describe 'DELETE /api/v1/users/me/todoes/:todo_id' do
     subject do
-      delete "/api/v1/users/#{id}/todoes/#{todo_id}", headers: headers
+      delete "/api/v1/users/me/todoes/#{todo_id}", headers: headers
     end
 
     let!(:user) { create(:user) }

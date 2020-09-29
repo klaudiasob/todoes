@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Todoes::Update, type: :request do
-  describe 'PATCH /api/v1/users/:id/todoes/:todo_id' do
+  describe 'PATCH /api/v1/users/me/todoes/:todo_id' do
     subject do
-      patch "/api/v1/users/#{id}/todoes/#{todo_id}", params: params, headers: headers
+      patch "/api/v1/users/me/todoes/#{todo_id}", params: params, headers: headers
     end
 
     let(:user) { create(:user) }
