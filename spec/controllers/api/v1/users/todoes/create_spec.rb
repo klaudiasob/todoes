@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Users::Todoes::Create, type: :request do
-  describe 'POST /api/v1/users/:id/todoes' do
+  describe 'POST /api/v1/users/me/todoes' do
     subject do
-      post "/api/v1/users/#{id}/todoes", params: params, headers: headers
+      post '/api/v1/users/me/todoes', params: params, headers: headers
     end
 
     let(:user) { User.create!(email: 'test@example.com', password: 'password', password_confirmation: 'password') }
@@ -51,9 +51,7 @@ RSpec.describe Api::V1::Users::Todoes::Create, type: :request do
             }
           end
 
-          it 'raises an error' do
-            expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
-          end
+          it_behaves_like '422'
         end
       end
 

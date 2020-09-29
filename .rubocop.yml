@@ -11,6 +11,7 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Max: 20
 Metrics/BlockLength:
+  Max: 40
   ExcludedMethods: ['describe', 'context']
 
 RSpec/NestedGroups:
@@ -26,3 +27,4 @@ AllCops:
   Exclude:
     - 'db/**/*'
     - 'bin/bundle'
+    - 'spec/requests/api/v1/**/*'

@@ -13,3 +13,10 @@ RSpec.shared_examples '403' do
     expect(response).to have_http_status(:forbidden)
   end
 end
+
+RSpec.shared_examples '422' do
+  it 'responds with 422' do
+    subject
+    expect(response).to have_http_status(:unprocessable_entity)
+  end
+end

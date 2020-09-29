@@ -40,9 +40,7 @@ RSpec.describe Api::V1::Users::Create, type: :request do
         }
       end
 
-      it 'raises an error' do
-        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
-      end
+      it_behaves_like '422'
     end
 
     context 'unauthorized' do
