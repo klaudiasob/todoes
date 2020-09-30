@@ -3,11 +3,11 @@ openapi: 3.0.1
 info:
   title: Todoes API
   version: v1
-  description: "This is the documentation for Version 1 (V1) of the Todoes API.\n
-    \         The API requires an bearer token for most endpoints. You can obtain
+  description: "This is the documentation for Version 1 (V1) of the Todoes API. The
+    API requires an bearer token for most endpoints.<br>\n          You can obtain
     an bearer token by signing up using POST /api/v1/users, then sign in using POST
-    /users/sign_in.\n          In response, you will receive your unique bearer token
-    which you will find it in response headers. "
+    /users/sign_in.<br>\n          In response, you will receive your unique bearer
+    token which you will find it in response headers. "
 components:
   securitySchemes:
     basic_auth:
