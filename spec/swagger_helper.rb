@@ -21,7 +21,7 @@ RSpec.configure do |config|
         title: 'Todoes API',
         version: 'v1',
         description: 'This is the documentation for Version 1 (V1) of the Todoes API.
-          The API requires an bearer token for most endpoints. You can obtain an bearer token by signing up using POST /api/v1/users, then sign in using /users/sign_in.
+          The API requires an bearer token for most endpoints. You can obtain an bearer token by signing up using POST /api/v1/users, then sign in using POST /users/sign_in.
           In response, you will receive your unique bearer token which you will find it in response headers. '
       },
       components: {

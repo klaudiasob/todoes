@@ -1,24 +1,44 @@
-# README
+# Todoes API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[todoes-api](https://secret-cove-74181.herokuapp.com/)
 
-Things you may want to cover:
+- Ruby [2.6.3](https://github.com/klaudiasob/todoes/blob/master/.ruby-version#L1)
+- Rails [6.0.2](https://github.com/klaudiasob/todoes/blob/master/Gemfile#L9)
 
-* Ruby version
+## Install
+#### 1. Check out the repository
 
-* System dependencies
+```bash
+git clone git@github.com:klaudiasob/todoes.git
+```
 
-* Configuration
+#### 2. Update database.yml file
 
-* Database creation
+Update the database configuration as required.
 
-* Database initialization
+#### 3. Create and setup the database
 
-* How to run the test suite
+Run the following commands to setup the database and populate it with seed data.
 
-* Services (job queues, cache servers, search engines, etc.)
+```ruby
+bundle exec rake db:setup
+```
 
-* Deployment instructions
+#### 4. Start the Rails server
 
-* ...
+You can start the rails server using the command given below.
+
+```ruby
+bundle exec rails s
+```
+
+And now you can visit the site with the URL http://localhost:3000
+
+#### JWT Authentication
+- The application uses `devise-jwt` gem. A user authenticates through `POST /users/sign_in` request.
+- If the authentication succeeds, a JWT token is dispatched to the client in the `Authorization` response header.
+- The client can use this token to authenticate following requests for the same user, providing it in the Authorization request header, also with format `Bearer #{token}`.
+#### Test data
+You can use following credentials with the `POST /users/sign_in` endpoint.
+- email: `user@example.com`
+- password: `password`
