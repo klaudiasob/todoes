@@ -25,8 +25,13 @@ Run the following commands to setup the database and populate it with seed data.
 ```ruby
 bundle exec rake db:setup
 ```
+#### 4. Add Rails credentials
 
-#### 4. Start the Rails server
+```ruby
+EDITOR="mate --wait" rails credentials:edit
+```
+
+#### 5. Start the Rails server
 
 You can start the rails server using the command given below.
 
